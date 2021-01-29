@@ -1,0 +1,18 @@
+
+default: &default
+  adapter: mysql2
+  pool: 5
+  username: root
+  password: 1
+
+development:
+  <<: *default
+  database: tripla_test_good_night_development
+
+test:
+  <<: *default
+  database: tripla_test_good_night_test
+
+production:
+  <<: *default
+  database: tripla_test_good_night_production
