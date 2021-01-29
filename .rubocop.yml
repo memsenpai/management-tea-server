@@ -1,0 +1,80 @@
+inherit_gem:
+  rubocop-github:
+    - config/default.yml
+    - config/rails.yml
+require:
+  - rubocop-performance
+  - rubocop-rspec
+  - rubocop-rails
+AllCops:
+  Exclude:
+    - vendor/**/*
+    - engines/**/*
+    - client/**/*
+    - db/seeds.rb
+    - db/seeds/**/*
+    - db/schema.rb
+    - tmp/**/*
+    - bin/*
+    - 'node_modules/**/*'
+GitHub/RailsControllerRenderLiteral:
+  Enabled: false
+GitHub/RailsControllerRenderPathsExist:
+  Enabled: false
+Layout/IndentationConsistency:
+  Enabled: true
+  EnforcedStyle: indented_internal_methods
+Layout/LineLength:
+  Enabled: true
+  Max: 110
+  Exclude:
+    - spec/**/**/*
+    - Guardfile
+    - benchmark/**/**/*
+    - db/**/**/*
+    - config/**/*
+    - bin/*
+    - app/views/**/**/**/*
+    - lib/tasks/*
+    - ./.rbenv/*
+Rails/Date:
+  Enabled: false
+  # Exclude:
+  #   - lib/**/*
+  #   - spec/**/**/*
+Rails/SkipsModelValidations:
+  Enabled: false
+  # Exclude:
+  #   - lib/**/*
+  #   - spec/**/**/*
+Rails/HasManyOrHasOneDependent:
+  Enabled: false
+Rails/BulkChangeTable:
+  Enabled: false
+Rails/FilePath:
+  Enabled: false
+Rails/ReversibleMigration:
+  Enabled: false
+Rails/Output:
+  Enabled: false
+Rails/CreateTableWithTimestamps:
+  Enabled: false
+Rails/UnknownEnv:
+  Enabled: false
+Rails/NotNullColumn:
+  Enabled: false
+Rails/InverseOf:
+  Enabled: false
+Rails/HelperInstanceVariable:
+  Enabled: false
+Rails/LexicallyScopedActionFilter:
+  Enabled: false
+Rails/ReflectionClassName:
+  Enabled: false
+Rails/DynamicFindBy:
+  Enabled: false
+Naming/FileName:
+  Exclude:
+    - config/**/*
+Rails/ActiveRecordAliases:
+  Enabled: false
