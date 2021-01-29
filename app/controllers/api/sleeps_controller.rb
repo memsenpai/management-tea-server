@@ -4,11 +4,15 @@ class Api::V1::SleepsController < Api::BaseController
   before_action :set_sleep, only: :update
 
   def index
-    render json: @user.sleeps.order(created_at: :desc)
+    sleeps = @user.sleeps
+    sleeps = sleeps.filter_start_time(
+      filter_start_time_params.as_json.symbolize_keys
+    ) if params[:filter_start_time]
+    render json: sleeps.order(created_at: :desc)
   end
 
   def create
-    @sleep = @user.sleeps.create({start_time: Time.current}.merge(sleep_params))
+    @sleep = @user.sleeps.new({start_time: Time.current}.merge(sleep_params))
     save_sleep
   end
 
@@ -23,14 +27,13 @@ class Api::V1::SleepsController < Api::BaseController
     params.permit(:start_time, :end_time)
   end
 
+  def filter_start_time_params
+    params.require(:filter_start_time).permit(:begin_start_time, :end_start_time)
+  end
+
   def save_sleep
     return render json: @sleep if @sleep.save
     render json: @sleep.errors, status: :bad_request
-  end
-
-  def set_user
-    @user = User.find_by_id(params[:user_id])
-    raise ActiveRecord::RecordNotFound if @user.blank?
   end
 
   def set_sleep
