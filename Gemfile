@@ -6,6 +6,7 @@ ruby "2.5.0"
 
 gem "active_model_serializers"
 gem "bootsnap", ">= 1.1.0", require: false
+gem "figaro"
 gem "mysql2"
 gem "puma", "~> 3.11"
 gem "rails", "~> 5.2.4", ">= 5.2.4.4"
