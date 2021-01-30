@@ -4,7 +4,7 @@ class Docs::V1::RootController < ApplicationController
 
   swagger_root do
     key :swagger, "2.0"
-    key :host, ENV['SWAGGER_HOST']
+    key :host, ENV["SWAGGER_HOST"]
     key :basePath, "/api/v1"
   end
 
