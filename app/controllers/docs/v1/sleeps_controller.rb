@@ -37,8 +37,8 @@ class Docs::V1::SleepsController < Docs::BaseController
         "user_create_sleep",
       ]
       parameter name: :user_id, in: :path, description: "ID of user", required: true, type: :integer
-      parameter name: :start_time, description: "Start time of sleep", type: :string
-      parameter name: :end_time, description: "End time of sleep", type: :string
+      parameter name: :start_time, in: :query, description: "Start time of sleep", type: :string
+      parameter name: :end_time, in: :query, description: "End time of sleep", type: :string
     end
   end
 
@@ -52,8 +52,8 @@ class Docs::V1::SleepsController < Docs::BaseController
       ]
       parameter name: :user_id, in: :path, description: "ID of user", required: true, type: :integer
       parameter name: :id, in: :path, description: "ID of sleep", required: true, type: :integer
-      parameter name: :start_time, description: "Start time of sleep", type: :string
-      parameter name: :end_time, description: "End time of sleep", type: :string
+      parameter name: :start_time, in: :query, description: "Start time of sleep", type: :string
+      parameter name: :end_time, in: :query, description: "End time of sleep", type: :string
     end
   end
 end

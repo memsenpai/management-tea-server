@@ -9,11 +9,11 @@ class Docs::V1::FollowsController < Docs::BaseController
         "user_follows",
       ]
       parameter name: :user_id, in: :path, description: "ID of user", required: true, type: :integer
-      parameter name: :type, description: "'followers' or 'followees'", required: true, type: :string
+      parameter name: :type, in: :path, description: "'followers' or 'followings'", required: true, type: :string
     end
   end
 
-  swagger_path "/users/{user_id}/follows" do
+  swagger_path "/users/{user_id}/follows?type={type}" do
     operation :post do
       key :summary, "Follow a user"
       key :operationId, "createFollow"
@@ -21,9 +21,8 @@ class Docs::V1::FollowsController < Docs::BaseController
         "user_follow",
       ]
       parameter name: :user_id, in: :path, description: "ID of user", required: true, type: :integer
-      parameter name: :type, description: "'user_followers' or 'user_followings'", required: true, type: :string
-      parameter name: :user_id, description: "ID of follower", required: true, type: :string
-      parameter name: :user_id, description: "ID of followee", required: true, type: :string
+      parameter name: :type, in: :path, description: "'user_followers' or 'user_followings'", required: true, type: :string
+      parameter name: :followee_id, in: :query, description: "ID of followee", required: true, type: :string
     end
   end
 

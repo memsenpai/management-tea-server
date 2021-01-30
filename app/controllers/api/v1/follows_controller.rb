@@ -9,7 +9,7 @@ class Api::V1::FollowsController < Api::BaseController
   end
 
   def create
-    follow = @user.send(params[:type]).new(follow_params)
+    follow = @user.send(params[:type]).new({follower_id: params[:user_id]}.merge(follow_params))
     return render json: follow if follow.save
     render json: follow.errors, status: :bad_request
   end
@@ -21,7 +21,7 @@ class Api::V1::FollowsController < Api::BaseController
 
   private
   def follow_params
-    params.permit(:follower_id, :followee_id)
+    params.permit(:followee_id)
   end
 
   def index_types
