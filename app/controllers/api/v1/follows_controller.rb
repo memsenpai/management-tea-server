@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 class Api::V1::FollowsController < Api::BaseController
   before_action :set_user
-  before_action :verify_type, only: [:index, :create]
+  before_action :verify_type, only: :index
   before_action :set_follow, only: :destroy
 
   def index
@@ -9,7 +9,7 @@ class Api::V1::FollowsController < Api::BaseController
   end
 
   def create
-    follow = @user.send(params[:type]).new({follower_id: params[:user_id]}.merge(follow_params))
+    follow = @user.user_followings.new({follower_id: params[:user_id]}.merge(follow_params))
     return render json: follow if follow.save
     render json: follow.errors, status: :bad_request
   end
@@ -24,19 +24,11 @@ class Api::V1::FollowsController < Api::BaseController
     params.permit(:followee_id)
   end
 
-  def index_types
-    ["followers", "followings"]
-  end
-
-  def create_types
-    ["user_followers", "user_followings"]
-  end
-
   def verify_type
     return render(
       json: { message: "Wrong type" },
       status: :bad_request
-    ) unless send("#{params[:action]}_types").include?(params[:type])
+    ) unless ["followers", "followings"].include?(params[:type])
   end
 
   def set_follow
