@@ -14,5 +14,4 @@ test:
   database: tripla_test_good_night_test
 
 production:
-  <<: *default
-  database: tripla_test_good_night_production
+   url: <%= ENV['DATABASE_URL'] %>
