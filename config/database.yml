@@ -7,11 +7,11 @@ default: &default
 
 development:
   <<: *default
-  database: tripla_test_good_night_development
+  database: management_tea_development
 
 test:
   <<: *default
-  database: tripla_test_good_night_test
+  database: management_tea_test
 
 production:
    url: <%= ENV['DATABASE_URL'] %>

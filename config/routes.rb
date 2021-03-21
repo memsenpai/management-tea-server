@@ -1,14 +1,11 @@
 # frozen_string_literal: true
 Rails.application.routes.draw do
-  namespace :api do
-    resources :v1, only: [:index], controller: "/docs/v1/root"
-    namespace :v1 do
-      resources :users do
-        resources :follows, only: [:index, :create, :destroy]
-        resources :sleeps, only: [:index, :create, :update]
-      end
-    end
+  scope :api, default: { format: :json } do
+    devise_for :users, controllers: { sessions: :sessions },
+      path_names: { sign_in: :login }
   end
-
-  mount SwaggerUiEngine::Engine, at: "/docs"
+  namespace :api, default: { format: :json } do
+    resources :items
+    resources :orders
+  end
 end

@@ -1,11 +1,17 @@
 # frozen_string_literal: true
 class User < ApplicationRecord
-  has_many :sleeps, dependent: :destroy
-  has_many :user_followers, class_name: "::Follow", foreign_key: :followee_id,
-    dependent: :destroy
-  has_many :followers, through: :user_followers, source: :follower
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  devise :database_authenticatable, :registerable,
+    :recoverable, :rememberable, :trackable
+  has_many :items
+  has_many :orders
 
-  has_many :user_followings, class_name: "::Follow", foreign_key: :follower_id,
-    dependent: :destroy
-  has_many :followings, through: :user_followings, source: :followee
+  def generate_jwt
+    require 'jwt'
+    ::JWT.encode({
+      id: id,
+      exp: 60.days.from_now.to_i
+    }, Rails.application.secrets.secret_key_base)
+  end
 end

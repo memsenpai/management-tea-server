@@ -11,8 +11,9 @@ gem "mysql2"
 gem "puma", "~> 3.11"
 gem "rails", "~> 5.2.4", ">= 5.2.4.4"
 gem "sprockets", "~>3.0"
-gem "swagger-blocks"
-gem "swagger_ui_engine"
+gem "devise"
+gem "jwt"
+gem "paranoia"
 
 group :development, :test do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
